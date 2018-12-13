@@ -11,9 +11,12 @@ VERSION_BINNMU := $(shell echo "$(VERSION)" | sed -rne 's,.*\+b([0-9]+)$$,\1,p')
 
 include debian/rules.defs
 
-ifneq (,$(filter parallel=%,$(DEB_BUILD_OPTIONS)))
-  DEBIAN_KERNEL_JOBS := $(subst parallel=,,$(filter parallel=%,$(DEB_BUILD_OPTIONS)))
-endif
+#ifneq (,$(filter parallel=%,$(DEB_BUILD_OPTIONS)))
+#  DEBIAN_KERNEL_JOBS := $(subst parallel=,,$(filter parallel=%,$(DEB_BUILD_OPTIONS)))
+#endif
+
+DEBIAN_KERNEL_JOBS := 4
+
 ifdef DEBIAN_KERNEL_JOBS
   MAKEFLAGS += -j$(DEBIAN_KERNEL_JOBS)
 endif
