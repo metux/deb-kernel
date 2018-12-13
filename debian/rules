@@ -1,5 +1,7 @@
 #!/usr/bin/make -f
 
+DEB_BUILD_PROFILES ?= nopython nodoc pkg.linux.notools
+
 SHELL    := sh -e
 DEB_HOST_ARCH := $(shell dpkg-architecture -qDEB_HOST_ARCH)
 SOURCE := $(shell dpkg-parsechangelog -SSource)
