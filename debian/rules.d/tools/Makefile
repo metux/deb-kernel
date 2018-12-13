@@ -1,7 +1,6 @@
 SUBDIRS = \
 	hv \
 	objtool \
-	perf \
 	power \
 	usb/usbip
 
