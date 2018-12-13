@@ -1,0 +1,6 @@
+
+added symlink:
+    ./tools/include/linux/nmi.h -> ../../../include/linux/nmi.h
+
+hard-patched out af9005
+    (should fix .config instead)
