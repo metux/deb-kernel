@@ -1,3 +1,7 @@
+#
+# Basic series that's applied to all feature sets
+#
+
 # Disable features broken by exclusion of upstream files
 debian/dfsg/arch-powerpc-platforms-8xx-ucode-disable.patch
 debian/dfsg/drivers-media-dvb-dvb-usb-af9005-disable.patch
