@@ -436,6 +436,10 @@ endif
 	  DIR='$(DIR)' PACKAGE_DIR='$(PACKAGE_DIR)' REAL_VERSION='$(REAL_VERSION)'
 	+$(MAKE_CLEAN) -C $(DIR) modules_install DEPMOD='$(CURDIR)/debian/bin/no-depmod' INSTALL_MOD_PATH='$(CURDIR)'/$(PACKAGE_DIR) INSTALL_MOD_STRIP=1
 ifeq ($(DEBUG),True)
+	echo "REAL_VERSION=$(REAL_VERESION)"
+	echo "PACKAGE_NAME=$(PACKAGE_NAME)"
+	echo "ABINAME=$(ABINAME)"
+	echo "LOCALVERSION=$(LOCALVERSION)"
 	set -o pipefail; \
 	(cd $(PACKAGE_DIR)/lib/modules/*/kernel/ && find * -name '*.ko') | while read module ; do \
 	  $(CROSS_COMPILE)objcopy --add-gnu-debuglink=$(DIR)/$$module $(PACKAGE_DIR)/lib/modules/*/kernel/$$module || exit; \
