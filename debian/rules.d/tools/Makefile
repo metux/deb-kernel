@@ -1,5 +1,6 @@
 SUBDIRS = \
 	hv \
+	lib/lockdep \
 	objtool \
 	usb/usbip
 
