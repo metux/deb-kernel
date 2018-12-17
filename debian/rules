@@ -121,4 +121,23 @@ debian/control-real: debian/bin/gencontrol.py $(CONTROL_FILES)
 	@echo
 	exit 1
 
-.PHONY: clean build setup binary-indep binary-arch binary
+.PHONY: clean build setup binary-indep binary-arch binary git-import
+
+GIT_IMPORT_DIR=$(BUILD_DIR)/git-import
+GIT_REPO_DIR=$(GIT_IMPORT_DIR)/repo
+#GIT_IMPORT_URL=git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+GIT_IMPORT_URL=https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
+GIT_IMPORT_REF=refs/tags/v$(VERSION_UPSTREAM)
+GIT_LOCAL_REF=refs/tags/upstream-v$(VERSION_UPSTREAM)
+GIT_DATE := $(shell date "+%Y-%m-%d-%H-%M-%S")
+
+$(GIT_REPO_DIR)/.git/config:
+	git init $(GIT_REPO_DIR)
+
+git-import:	$(GIT_REPO_DIR)/.git/config
+	@echo "BUILD_DIR=$(BUILD_DIR)"
+	@echo "VERSION_UPSTREAM=$(VERSION_UPSTREAM)"
+	@echo "$@: fetching $(VERSION_UPSTREAM) from kernel.org"
+	@cd $(GIT_REPO_DIR) && git fetch --depth=5 $(GIT_IMPORT_URL) $(GIT_IMPORT_REF):$(GIT_LOCAL_REF)
+	@echo $(GIT_DATE)
+	@cd $(GIT_REPO_DIR) && git checkout $(GIT_LOCAL_REF) -b temp-$(GIT_DATE)
